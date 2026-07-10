@@ -1,11 +1,15 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Customer\PlaceExploreController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/explore', [PlaceExploreController::class, 'index'])->name('customer.explore');
+Route::get('/explore/{id}', [PlaceExploreController::class, 'show'])->name('customer.show');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
