@@ -11,6 +11,7 @@ Route::get('/', function () {
 
 Route::get('/explore', [PlaceExploreController::class, 'index'])->name('customer.explore');
 Route::get('/explore/{id}', [PlaceExploreController::class, 'show'])->name('customer.show');
+Route::get('/explore/{id}/booking', [PlaceExploreController::class, 'bookingForm'])->name('customer.booking.form');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

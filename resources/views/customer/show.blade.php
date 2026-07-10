@@ -31,7 +31,7 @@
                         <li class="list-group-item"><strong>🕒 Jam Operasional:</strong> {{ substr($place->open_time, 0, 5) }} - {{ substr($place->close_time, 0, 5) }} WIB</li>
                     </ul>
 
-                    <button class="btn btn-success btn-lg w-100 fw-bold shadow-sm" disabled>Booking Tempat Sekarang</button>
+                    <a href="{{ url('/explore/'.$place->id.'/booking') }}" class="btn btn-success btn-lg w-100 fw-bold shadow-sm">Booking Tempat Sekarang</a>
                     <small class="text-muted d-block text-center mt-2">*Fitur booking akan aktif setelah sistem user terintegrasi.</small>
                 </div>
             </div>
