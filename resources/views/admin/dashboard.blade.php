@@ -1,3 +1,13 @@
-<h1>Dashboard Admin</h1>
+@extends('layouts.admin')
 
-<p>Selamat datang di Dashboard Admin ReservHub.</p>
+@section('title', 'Dashboard')
+
+@section('content')
+<div class="p-6">
+    <h1 class="text-3xl font-bold">Dashboard Admin</h1>
+
+    <p class="mt-2 text-gray-600">
+        Selamat datang di Dashboard Admin ReservHub.
+    </p>
+</div>
+@endsection

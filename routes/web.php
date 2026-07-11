@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminDashboardController;
+use App\Http\Controllers\Admin\CategoryController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -15,6 +16,18 @@ Route::get('/dashboard', function () {
 Route::middleware(['auth', 'role:Admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])
         ->name('admin.dashboard');
+    Route::get('/admin/categories', [CategoryController::class, 'index'])
+        ->name('admin.categories.index');
+    Route::get('/admin/categories/create', [CategoryController::class, 'create'])
+        ->name('admin.categories.create');
+    Route::post('/admin/categories', [CategoryController::class, 'store'])
+    ->name('admin.categories.store');
+    Route::get('/admin/categories/{category}/edit', [CategoryController::class, 'edit'])
+    ->name('admin.categories.edit');
+    Route::put('/admin/categories/{category}', [CategoryController::class, 'update'])
+    ->name('admin.categories.update');
+    Route::delete('/admin/categories/{category}', [CategoryController::class, 'destroy'])
+    ->name('admin.categories.destroy');
 });
 
 Route::middleware('auth')->group(function () {
