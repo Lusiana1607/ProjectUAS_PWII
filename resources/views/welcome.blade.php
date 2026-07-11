@@ -45,7 +45,7 @@
 
     </p>
 
-    <a href="#" class="btn btn-success btn-lg mt-3">
+    <a href="{{ route('customer.explore') }}" class="btn btn-success btn-lg mt-3">
 
         Cari Tempat
 
