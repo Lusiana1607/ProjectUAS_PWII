@@ -23,6 +23,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/bookings/history', [PlaceExploreController::class, 'bookingHistory'])->name('customer.booking.history');
     Route::post('/favorites/toggle/{place_id}', [PlaceExploreController::class, 'toggleFavorite'])->name('customer.favorite.toggle');
     Route::get('/favorites', [PlaceExploreController::class, 'favoriteList'])->name('customer.favorite.list');
+    Route::post('/place/{place_id}/review', [PlaceExploreController::class, 'storeReview'])->name('customer.review.store');
     Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])
         ->name('admin.dashboard');
     Route::get('/admin/categories', [CategoryController::class, 'index'])

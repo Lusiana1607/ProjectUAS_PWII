@@ -28,8 +28,31 @@ class PlaceExploreController extends Controller
             return redirect()->route('customer.explore');
         }
 
-        // Kirim data tempat ke file view detail yang akan kita buat
-        return view('customer.show', compact('place'));
+        $reviews = DB::table('reviews')
+            ->join('users', 'reviews.user_id', '=', 'users.id')
+            ->where('reviews.place_id', $id)
+            ->select('reviews.*', 'users.name as user_name')
+            ->orderBy('reviews.created_at', 'desc')
+            ->get();
+        
+        $userId = Auth::id();
+        $bookingToReview = null;
+    
+        if ($userId) {
+            $bookingToReview = DB::table('bookings')
+                ->where('user_id', $userId)
+                ->where('place_id', $id)
+                ->where('status', 'completed')
+                ->whereNotExists(function ($query) {
+                    $query->select(DB::raw(1))
+                        ->from('reviews')
+                        ->whereColumn('reviews.booking_id', 'bookings.id');
+                })
+                ->first();
+            }
+
+        // Kirim data $place DAN $reviews ke view
+        return view('customer.show', compact('place', 'reviews', 'bookingToReview'));
     }
 
     public function bookingForm($id)
@@ -121,5 +144,38 @@ class PlaceExploreController extends Controller
             ->get();
 
         return view('customer.favorites', compact('favorites'));
+    }
+
+    public function storeReview(Request $request, $place_id)
+    {
+        // Validasi input: bintang wajib 1-5, komentar opsional
+        $request->validate([
+            'rating' => 'required|integer|min:1|max:5',
+            'comment' => 'nullable|string|max:1000',
+            'booking_id' => 'required|integer',
+        ]);
+
+        $isComplete = DB::table('bookings')
+            ->where('id', $request->booking_id)
+            ->where('user_id', Auth::id())
+            ->where('status', 'completed')
+            ->exists();
+
+        if (!$isComplete) {
+            return redirect()->back()->with('error', 'Kamu tidak bisa mengulas tempat ini sebelum status booking diselesaikan oleh Admin.');
+        }
+
+        // Masukkan data ke tabel reviews
+        DB::table('reviews')->insert([
+            'user_id' => Auth::id(),
+            'place_id' => $place_id,
+            'booking_id' => $request->booking_id,
+            'rating' => $request->rating,
+            'comment' => $request->comment,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        return redirect()->back()->with('review_success', 'Terima kasih! Ulasan kamu berhasil disimpan.');
     }
 }

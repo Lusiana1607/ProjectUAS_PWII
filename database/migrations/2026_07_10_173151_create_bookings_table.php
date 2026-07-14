@@ -22,7 +22,7 @@ return new class extends Migration
             $table->integer('total_guests');
             
             // Status booking (pending, approved, rejected)
-            $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
+            $table->enum('status', ['pending', 'approved', 'rejected', 'completed'])->default('pending');
             $table->timestamps();
         });
     }
