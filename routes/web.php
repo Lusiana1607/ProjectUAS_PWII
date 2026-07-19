@@ -70,6 +70,9 @@ Route::middleware(['auth'])->group(function () {
         ->name('admin.categories.destroy');
 
     Route::resource('admin/users', UserController::class);
+
+    Route::patch('/admin/users/{user}/toggle-status', [UserController::class, 'toggleStatus'])
+    ->name('admin.users.toggle-status');
 });
 
 Route::middleware('auth')->group(function () {

@@ -51,6 +51,13 @@
 
     </a>
 
+     <a href="{{ route('users.index') }}"
+       class="inline-block bg-green-600 hover:bg-green-700 text-white px-5 py-3 rounded-lg">
+
+        👥 Kelola User
+
+    </a>
+
 </div>
 
 <div class="bg-white shadow rounded-lg p-6 mt-8">

@@ -19,6 +19,9 @@
                 <th class="text-left py-3">Nama</th>
                 <th class="text-left py-3">Email</th>
                 <th class="text-left py-3">Role</th>
+                <th class="text-left py-3">Role</th>
+                <th class="text-left py-3">Status</th>
+                <th class="text-left py-3">Aksi</th>
             </tr>
 
         </thead>
@@ -42,7 +45,37 @@
                     </td>
 
                     <td>
-                        {{ $user->role->name ?? '-' }}
+                        @if($user->is_active)
+                        <span class="text-green-600 font-semibold">
+                            Aktif
+                        </span>
+                        @else
+                        <span class="text-red-600 font-semibold">
+                            Nonaktif
+                        </span>
+                        @endif
+                    </td>
+
+                    <td>
+                        <form action="{{ route('admin.users.toggle-status', $user) }}" method="POST">
+                        @csrf
+                        @method('PATCH')
+
+                        @if($user->is_active)
+                        <button
+                            type="submit"
+                            class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded">
+                            Nonaktifkan
+                        </button>
+                        @else
+                        <button
+                            type="submit"
+                            class="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded">
+                            Aktifkan
+                        </button>
+                        @endif
+
+                        </form>
                     </td>
 
                 </tr>
@@ -51,7 +84,7 @@
 
                 <tr>
 
-                    <td colspan="4" class="text-center py-5">
+                    <td colspan="6" class="text-center py-5">
                         Belum ada user.
                     </td>
 
