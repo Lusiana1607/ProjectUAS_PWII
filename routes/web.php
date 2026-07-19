@@ -22,7 +22,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 
-// CUSTOMER 
+// CUSTOMER
 Route::middleware(['auth'])->group(function () {
 
     Route::get('/explore/{id}/booking', [PlaceExploreController::class, 'bookingForm'])
@@ -39,10 +39,13 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/favorites', [PlaceExploreController::class, 'favoriteList'])
         ->name('customer.favorite.list');
+
+    Route::post('/place/{place_id}/review', [PlaceExploreController::class, 'storeReview'])
+        ->name('customer.review.store');
 });
 
 
-// ADMIN 
+// ADMIN
 Route::middleware(['auth'])->group(function () {
 
     Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])
@@ -68,7 +71,6 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('admin/users', UserController::class);
 });
-
 
 Route::middleware('auth')->group(function () {
 
