@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Customer\PlaceExploreController;
 use App\Http\Controllers\Admin\OwnerRequestController;
+use App\Http\Controllers\Owner\OwnerDashboardController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -24,7 +25,7 @@ Route::get('/dashboard', function () {
 
 
 // CUSTOMER
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'role:Customer'])->group(function () {
 
     Route::get('/explore/{id}/booking', [PlaceExploreController::class, 'bookingForm'])
         ->name('customer.booking.form');
@@ -47,7 +48,7 @@ Route::middleware(['auth'])->group(function () {
 
 
 // ADMIN
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'role:Admin'])->group(function () {
 
     Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])
         ->name('admin.dashboard');
@@ -86,6 +87,14 @@ Route::middleware(['auth'])->group(function () {
 
     Route::patch('/admin/owner-requests/{ownerRequest}/reject', [OwnerRequestController::class, 'reject'])
     ->name('admin.owner-requests.reject');
+});
+
+// OWNER
+Route::middleware(['auth', 'role:Owner'])->group(function () {
+
+    Route::get('/owner/dashboard', [OwnerDashboardController::class, 'index'])
+        ->name('owner.dashboard');
+
 });
 
 Route::middleware('auth')->group(function () {

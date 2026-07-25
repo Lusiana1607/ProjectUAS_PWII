@@ -26,6 +26,10 @@ public function approve(OwnerRequest $ownerRequest)
         'status' => 'approved',
     ]);
 
+    $ownerRequest->user->update([
+    'role_id' => 2,
+]);
+
     return redirect()
         ->route('admin.owner-requests.show', $ownerRequest)
         ->with('success', 'Pengajuan owner berhasil disetujui.');
