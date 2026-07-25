@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Customer\PlaceExploreController;
+use App\Http\Controllers\Admin\OwnerRequestController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -73,6 +74,18 @@ Route::middleware(['auth'])->group(function () {
 
     Route::patch('/admin/users/{user}/toggle-status', [UserController::class, 'toggleStatus'])
     ->name('admin.users.toggle-status');
+
+    Route::get('/admin/owner-requests', [OwnerRequestController::class, 'index'])
+    ->name('admin.owner-requests.index');
+
+    Route::get('/admin/owner-requests/{ownerRequest}', [OwnerRequestController::class, 'show'])
+    ->name('admin.owner-requests.show');
+
+    Route::patch('/admin/owner-requests/{ownerRequest}/approve', [OwnerRequestController::class, 'approve'])
+    ->name('admin.owner-requests.approve');
+
+    Route::patch('/admin/owner-requests/{ownerRequest}/reject', [OwnerRequestController::class, 'reject'])
+    ->name('admin.owner-requests.reject');
 });
 
 Route::middleware('auth')->group(function () {

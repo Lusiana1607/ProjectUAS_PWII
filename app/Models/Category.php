@@ -16,4 +16,9 @@ class Category extends Model
     {
         return $this->hasMany(Place::class);
     }
+
+    public function ownerRequests(): HasMany
+    {
+        return $this->hasMany(OwnerRequest::class);
+    }
 }
