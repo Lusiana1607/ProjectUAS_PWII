@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Customer\PlaceExploreController;
 use App\Http\Controllers\Admin\OwnerRequestController;
 use App\Http\Controllers\Owner\OwnerDashboardController;
+use App\Http\Controllers\Owner\PlaceController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -94,6 +95,9 @@ Route::middleware(['auth', 'role:Owner'])->group(function () {
 
     Route::get('/owner/dashboard', [OwnerDashboardController::class, 'index'])
         ->name('owner.dashboard');
+
+    Route::resource('owner/places', PlaceController::class)
+        ->names('owner.places');
 
 });
 
