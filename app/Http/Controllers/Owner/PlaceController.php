@@ -7,6 +7,7 @@ use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PlaceController extends Controller
 {
@@ -43,7 +44,16 @@ class PlaceController extends Controller
         'description' => 'required|string',
         'open_time' => 'required',
         'close_time' => 'required',
+        'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
     ]);
+
+    $imagePath = null;
+
+if ($request->hasFile('image')) {
+
+    $imagePath = $request->file('image')->store('places', 'public');
+
+}
 
     Place::create([
         'user_id' => Auth::id(),
@@ -54,7 +64,8 @@ class PlaceController extends Controller
         'description' => $validated['description'],
         'open_time' => $validated['open_time'],
         'close_time' => $validated['close_time'],
-        'status' => 'pending',
+'image' => $imagePath,
+'status' => 'pending',
     ]);
 
     return redirect()

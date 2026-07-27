@@ -43,6 +43,25 @@
 
                 <div class="bg-white rounded-xl shadow p-6">
 
+                @if($place->image)
+
+    <img
+        src="{{ asset('storage/' . $place->image) }}"
+        alt="{{ $place->name }}"
+        class="w-full h-48 object-cover rounded-lg mb-4">
+
+@else
+
+    <div class="w-full h-48 bg-gray-200 rounded-lg flex items-center justify-center mb-4">
+
+        <span class="text-gray-500">
+            Belum ada foto
+        </span>
+
+    </div>
+
+@endif
+
                     <h2 class="text-xl font-bold text-gray-800">
                         {{ $place->name }}
                     </h2>

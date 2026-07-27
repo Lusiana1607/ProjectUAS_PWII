@@ -16,7 +16,9 @@
 
     <div class="bg-white shadow rounded-xl p-6">
 
-    <form action="{{ route('owner.places.store') }}" method="POST">
+    <form action="{{ route('owner.places.store') }}"
+      method="POST"
+      enctype="multipart/form-data">
     @csrf
 
     {{-- Nama Tempat --}}
@@ -91,6 +93,20 @@
             class="w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-green-500"
             placeholder="Ceritakan tempat usaha Anda"></textarea>
     </div>
+
+    <div class="mb-5">
+
+    <label class="block text-sm font-medium text-gray-700 mb-2">
+        Foto Tempat
+    </label>
+
+    <input
+        type="file"
+        name="image"
+        accept="image/*"
+        class="w-full border rounded-lg px-4 py-2">
+
+</div>
 
     <div class="grid grid-cols-2 gap-4">
 
