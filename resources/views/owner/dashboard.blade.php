@@ -64,6 +64,16 @@
             Lihat Tempat Saya
         </a>
 
+        <a href="{{ route('owner.bookings.index') }}"
+   class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-lg transition">
+    Reservasi Masuk
+</a>
+
+<a href="{{ route('owner.services.index') }}"
+   class="inline-block bg-purple-600 hover:bg-purple-700 text-white font-semibold px-6 py-3 rounded-lg transition">
+    Kelola Layanan
+</a>
+
     </div>
 
 </div>

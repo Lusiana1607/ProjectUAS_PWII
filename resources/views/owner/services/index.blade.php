@@ -6,14 +6,35 @@
 
 <div class="max-w-7xl mx-auto">
 
-    <h1 class="text-3xl font-bold text-gray-800 mb-2">
-        Layanan Saya
-    </h1>
+    <div class="flex justify-between items-center mb-8">
 
-    <p class="text-gray-500 mb-6">
-        Total layanan:
-        <strong>{{ $services->count() }}</strong>
-    </p>
+        <div>
+
+            <h1 class="text-3xl font-bold text-gray-800">
+                Layanan Saya
+            </h1>
+
+            <p class="text-gray-500 mt-2">
+                Total layanan:
+                <strong>{{ $services->count() }}</strong>
+            </p>
+
+        </div>
+
+        <a href="{{ route('owner.services.create') }}"
+           class="bg-green-600 hover:bg-green-700 text-white px-5 py-3 rounded-lg">
+            + Tambah Layanan
+        </a>
+
+    </div>
+
+    @if(session('success'))
+
+        <div class="bg-green-100 text-green-700 px-4 py-3 rounded-lg mb-6">
+            {{ session('success') }}
+        </div>
+
+    @endif
 
     @if($services->count() > 0)
 
@@ -36,6 +57,34 @@
                 <p>
                     Durasi: {{ $service->duration }} menit
                 </p>
+
+                <div class="mt-4 flex gap-2">
+
+    <a href="{{ route('owner.services.edit', $service->id) }}"
+       class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg">
+
+        Edit
+
+    </a>
+
+    <form action="{{ route('owner.services.destroy', $service->id) }}"
+          method="POST"
+          onsubmit="return confirm('Yakin ingin menghapus layanan ini?')">
+
+        @csrf
+        @method('DELETE')
+
+        <button
+            type="submit"
+            class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg">
+
+            Hapus
+
+        </button>
+
+    </form>
+
+</div>
 
             </div>
 
