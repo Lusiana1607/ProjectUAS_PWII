@@ -20,7 +20,7 @@
         </h2>
 
         <p class="text-3xl font-bold mt-2">
-            0
+            {{ $placesCount }}
         </p>
     </div>
 
@@ -52,10 +52,19 @@
         Menu Owner
     </h2>
 
-    <<a href="{{ route('owner.places.create') }}"
-   class="inline-block bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-3 rounded-lg transition">
-    Tambah Tempat
-</a>
+    <div class="flex gap-3">
+
+        <a href="{{ route('owner.places.create') }}"
+           class="inline-block bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-3 rounded-lg transition">
+            + Tambah Tempat
+        </a>
+
+        <a href="{{ route('owner.places.index') }}"
+           class="inline-block bg-gray-600 hover:bg-gray-700 text-white font-semibold px-6 py-3 rounded-lg transition">
+            Lihat Tempat Saya
+        </a>
+
+    </div>
 
 </div>
 

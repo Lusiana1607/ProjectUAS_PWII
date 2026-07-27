@@ -9,6 +9,8 @@ use App\Http\Controllers\Customer\PlaceExploreController;
 use App\Http\Controllers\Admin\OwnerRequestController;
 use App\Http\Controllers\Owner\OwnerDashboardController;
 use App\Http\Controllers\Owner\PlaceController;
+use App\Http\Controllers\Owner\BookingController;
+use App\Http\Controllers\Owner\ServiceController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -98,6 +100,15 @@ Route::middleware(['auth', 'role:Owner'])->group(function () {
 
     Route::resource('owner/places', PlaceController::class)
         ->names('owner.places');
+
+    Route::get('/owner/bookings', [BookingController::class, 'index'])
+    ->name('owner.bookings.index');
+
+    Route::patch('/owner/bookings/{id}/status', [BookingController::class, 'updateStatus'])
+    ->name('owner.bookings.update-status');
+
+    Route::resource('owner/services', ServiceController::class)
+    ->names('owner.services');
 
 });
 

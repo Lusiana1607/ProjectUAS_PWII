@@ -9,6 +9,8 @@ class OwnerDashboardController extends Controller
 {
     public function index(): View
     {
-        return view('owner.dashboard');
+        $placesCount = auth()->user()->places()->count();
+
+        return view('owner.dashboard', compact('placesCount'));
     }
 }

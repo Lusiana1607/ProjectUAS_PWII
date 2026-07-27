@@ -118,7 +118,13 @@ class PlaceController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
-    {
-        //
-    }
+{
+    $place = Auth::user()->places()->findOrFail($id);
+
+    $place->delete();
+
+    return redirect()
+        ->route('owner.places.index')
+        ->with('success', 'Tempat berhasil dihapus.');
+}
 }

@@ -71,14 +71,28 @@
 
                     </div>
 
-                    <div class="mt-6">
+                    <div class="mt-6 flex gap-2">
 
-                        <a href="{{ route('owner.places.edit', $place->id) }}"
-                           class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg">
-                            Edit
-                        </a>
+    <a href="{{ route('owner.places.edit', $place->id) }}"
+       class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg">
+        Edit
+    </a>
 
-                    </div>
+    <form action="{{ route('owner.places.destroy', $place->id) }}"
+          method="POST"
+          onsubmit="return confirm('Apakah Anda yakin ingin menghapus tempat ini?');">
+
+        @csrf
+        @method('DELETE')
+
+        <button type="submit"
+                class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg">
+            Hapus
+        </button>
+
+    </form>
+
+</div>
 
                 </div>
 
