@@ -1,18 +1,44 @@
 <x-guest-layout>
+
+    <div class="w-full max-w-2xl mx-auto">
+
+    <div class="bg-white rounded-2xl shadow-xl border border-green-100 p-8">
+
+        <div class="text-center mb-8">
+
+            <h1 class="text-4xl font-bold text-green-700">
+                ReservHub
+            </h1>
+
+            <p class="text-gray-500 mt-2">
+                Buat akun baru dan mulai gunakan ReservHub.
+            </p>
+
+        </div>
+
     <form method="POST" action="{{ route('register') }}">
         @csrf
 
         <!-- Name -->
         <div>
             <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
+            <x-text-input
+    id="name"
+    class="block mt-2 w-full rounded-lg border-gray-300 focus:border-green-500 focus:ring-green-500"
+    type="text"
+    name="name"
+    :value="old('name')"
+    required
+    autofocus
+    autocomplete="name"
+/>
             <x-input-error :messages="$errors->get('name')" class="mt-2" />
         </div>
 
         <!-- Email Address -->
         <div class="mt-4">
             <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
+            <x-text-input id="email" class="block mt-2 w-full rounded-lg border-gray-300 focus:border-green-500 focus:ring-green-500" type="email" name="email" :value="old('email')" required autocomplete="username" />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
@@ -20,7 +46,7 @@
         <div class="mt-4">
             <x-input-label for="password" :value="__('Password')" />
 
-            <x-text-input id="password" class="block mt-1 w-full"
+            <x-text-input id="password" class="block mt-2 w-full rounded-lg border-gray-300 focus:border-green-500 focus:ring-green-500"
                             type="password"
                             name="password"
                             required autocomplete="new-password" />
@@ -32,7 +58,7 @@
         <div class="mt-4">
             <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
 
-            <x-text-input id="password_confirmation" class="block mt-1 w-full"
+            <x-text-input id="password_confirmation" class="block mt-2 w-full rounded-lg border-gray-300 focus:border-green-500 focus:ring-green-500"
                             type="password"
                             name="password_confirmation" required autocomplete="new-password" />
 
@@ -49,19 +75,20 @@
 
     <div class="mt-3 space-y-3">
 
-        <label class="flex items-center gap-3 border rounded-lg p-4 cursor-pointer hover:border-green-500">
+        <label class="flex items-start gap-4 border border-gray-200 rounded-xl p-4 cursor-pointer transition duration-200 hover:border-green-500 hover:bg-green-50">
 
-            <input
+           <input
     type="radio"
     name="role"
     value="customer"
     checked
     onclick="toggleOwnerFields()"
+    class="mt-1 text-green-600 focus:ring-green-500"
 >
 
             <div>
 
-                <p class="font-semibold">
+                <p class="font-semibold text-gray-800">
                     Customer
                 </p>
 
@@ -73,18 +100,19 @@
 
         </label>
 
-        <label class="flex items-center gap-3 border rounded-lg p-4 cursor-pointer hover:border-green-500">
+        <label class="flex items-start gap-4 border border-gray-200 rounded-xl p-4 cursor-pointer transition duration-200 hover:border-green-500 hover:bg-green-50">
 
             <input
-                type="radio"
-                name="role"
-                value="owner"
-                onclick="toggleOwnerFields()"
-            >
+    type="radio"
+    name="role"
+    value="owner"
+    onclick="toggleOwnerFields()"
+    class="mt-1 text-green-600 focus:ring-green-500"
+>
 
             <div>
 
-                <p class="font-semibold">
+                <p class="font-semibold text-gray-800">
                     Owner
                 </p>
 
@@ -101,11 +129,21 @@
 </div>
 
         <!-- Data Owner -->
-<div id="owner-fields" class="mt-6 hidden">
+<div id="owner-fields" class="mt-8 hidden">
 
-    <h3 class="text-lg font-semibold text-gray-800 mb-4">
+    <div class="bg-green-50 border border-green-200 rounded-xl p-6">
+
+    <h3 class="text-xl font-bold text-green-700 mb-2">
+
         Informasi Usaha
+
     </h3>
+
+    <p class="text-sm text-gray-600 mb-6">
+
+        Lengkapi data usaha Anda untuk mengajukan akun sebagai Owner.
+
+    </p>
 
     <!-- Nama Usaha -->
     <div class="mb-4">
@@ -207,15 +245,35 @@
 
 </div>
 
-        <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
-                {{ __('Already registered?') }}
-            </a>
+</div>
 
-            <x-primary-button class="ms-4">
-                {{ __('Register') }}
-            </x-primary-button>
-        </div>
+        <div class="mt-8">
+
+    <button
+        type="submit"
+        class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-lg transition duration-200">
+
+        Daftar
+
+    </button>
+
+    <div class="text-center mt-5">
+
+        <span class="text-gray-600">
+            Sudah punya akun?
+        </span>
+
+        <a
+            href="{{ route('login') }}"
+            class="text-green-600 font-semibold hover:underline">
+
+            Masuk
+
+        </a>
+
+    </div>
+
+</div>
     </form>
 
     <script>
@@ -241,5 +299,9 @@ function toggleOwnerFields() {
 window.onload = toggleOwnerFields;
 
 </script>
+
+    </div>
+
+</div>
 
 </x-guest-layout>
