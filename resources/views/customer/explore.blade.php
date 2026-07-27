@@ -56,6 +56,26 @@
         @foreach($places as $place)
         <div class="col">
             <div class="card h-100 shadow-sm border-0">
+
+            @if($place->image)
+
+    <img
+        src="{{ asset('storage/' . $place->image) }}"
+        class="card-img-top"
+        style="height:220px; object-fit:cover;"
+        alt="{{ $place->name }}">
+
+@else
+
+    <div
+        class="bg-secondary text-white d-flex align-items-center justify-content-center"
+        style="height:220px;">
+
+        Belum ada foto
+
+    </div>
+
+@endif
                 <div class="card-body d-flex flex-column justify-content-between">
                     <div>
                         <h5 class="card-title fw-bold">{{ $place->name }}</h5>
