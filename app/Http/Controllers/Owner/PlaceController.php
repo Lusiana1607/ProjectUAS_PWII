@@ -106,19 +106,21 @@ if ($request->hasFile('image')) {
         'description' => 'required|string',
         'open_time' => 'required',
         'close_time' => 'required',
+        'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
     ]);
 
     $place = Auth::user()->places()->findOrFail($id);
 
-    $place->update([
-        'name' => $validated['name'],
-        'category_id' => $validated['category_id'],
-        'address' => $validated['address'],
-        'phone' => $validated['phone'],
-        'description' => $validated['description'],
-        'open_time' => $validated['open_time'],
-        'close_time' => $validated['close_time'],
-    ]);
+    if ($request->hasFile('image')) {
+
+        if ($place->image && Storage::disk('public')->exists($place->image)) {
+            Storage::disk('public')->delete($place->image);
+        }
+
+        $validated['image'] = $request->file('image')->store('places', 'public');
+    }
+
+    $place->update($validated);
 
     return redirect()
         ->route('owner.places.index')

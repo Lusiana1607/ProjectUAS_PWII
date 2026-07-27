@@ -16,7 +16,9 @@
 
     <div class="bg-white shadow rounded-xl p-6">
 
-        <form action="{{ route('owner.places.update', $place->id) }}" method="POST">
+        <form action="{{ route('owner.places.update', $place->id) }}"
+      method="POST"
+      enctype="multipart/form-data">
 
             @csrf
             @method('PUT')
@@ -99,6 +101,46 @@
                     class="w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-green-500"
                 >{{ $place->description }}</textarea>
             </div>
+
+            {{-- Foto Tempat --}}
+<div class="mb-5">
+
+    <label class="block text-sm font-medium text-gray-700 mb-2">
+        Foto Tempat
+    </label>
+
+    {{-- Foto Saat Ini --}}
+    @if($place->image)
+
+        <div class="mb-4">
+
+            <p class="text-sm text-gray-500 mb-2">
+                Foto Saat Ini:
+            </p>
+
+            <img
+                src="{{ asset('storage/' . $place->image) }}"
+                alt="{{ $place->name }}"
+                class="w-64 h-40 object-cover rounded-lg shadow"
+            >
+
+        </div>
+
+    @endif
+
+    {{-- Pilih Foto Baru --}}
+    <input
+        type="file"
+        name="image"
+        accept="image/*"
+        class="w-full border rounded-lg px-4 py-2"
+    >
+
+    <p class="text-sm text-gray-500 mt-2">
+        Kosongkan jika tidak ingin mengganti foto.
+    </p>
+
+</div>
 
             {{-- Jam Operasional --}}
             <div class="grid grid-cols-2 gap-4">

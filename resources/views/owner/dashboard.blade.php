@@ -12,36 +12,36 @@
     Selamat datang, {{ auth()->user()->name }} 👋
 </p>
 
-<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
     <div class="bg-white shadow rounded-lg p-6">
-        <h2 class="text-gray-500 text-sm">
-            Tempat Saya
-        </h2>
-
-        <p class="text-3xl font-bold mt-2">
-            {{ $placesCount }}
-        </p>
+        <h2 class="text-gray-500 text-sm">Tempat Saya</h2>
+        <p class="text-3xl font-bold mt-2">{{ $totalPlaces }}</p>
     </div>
 
     <div class="bg-white shadow rounded-lg p-6">
-        <h2 class="text-gray-500 text-sm">
-            Reservasi Masuk
-        </h2>
-
-        <p class="text-3xl font-bold mt-2">
-            0
-        </p>
+        <h2 class="text-gray-500 text-sm">Layanan Saya</h2>
+        <p class="text-3xl font-bold mt-2">{{ $totalServices }}</p>
     </div>
 
     <div class="bg-white shadow rounded-lg p-6">
-        <h2 class="text-gray-500 text-sm">
-            Status Akun
-        </h2>
+        <h2 class="text-gray-500 text-sm">Total Reservasi</h2>
+        <p class="text-3xl font-bold mt-2">{{ $totalBookings }}</p>
+    </div>
 
-        <p class="text-green-600 font-semibold mt-2">
-            Owner Aktif
-        </p>
+    <div class="bg-white shadow rounded-lg p-6">
+        <h2 class="text-yellow-600 text-sm">Pending</h2>
+        <p class="text-3xl font-bold mt-2">{{ $pendingBookings }}</p>
+    </div>
+
+    <div class="bg-white shadow rounded-lg p-6">
+        <h2 class="text-green-600 text-sm">Disetujui</h2>
+        <p class="text-3xl font-bold mt-2">{{ $approvedBookings }}</p>
+    </div>
+
+    <div class="bg-white shadow rounded-lg p-6">
+        <h2 class="text-blue-600 text-sm">Selesai</h2>
+        <p class="text-3xl font-bold mt-2">{{ $completedBookings }}</p>
     </div>
 
 </div>

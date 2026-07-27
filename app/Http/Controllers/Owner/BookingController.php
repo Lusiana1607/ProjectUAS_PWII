@@ -9,17 +9,20 @@ use Illuminate\Http\Request;
 
 class BookingController extends Controller
 {
-    public function index()
-    {
-        $bookings = Booking::whereHas('place', function ($query) {
-            $query->where('user_id', Auth::id());
-        })
-        ->with(['user', 'place'])
-        ->latest()
-        ->get();
+   public function index(Request $request)
+{
+    $query = Booking::whereHas('place', function ($query) {
+        $query->where('user_id', Auth::id());
+    })->with(['user', 'place']);
 
-        return view('owner.bookings.index', compact('bookings'));
+    if ($request->filled('status')) {
+        $query->where('status', $request->status);
     }
+
+    $bookings = $query->latest()->get();
+
+    return view('owner.bookings.index', compact('bookings'));
+}
 
     public function updateStatus(Request $request, string $id)
     {

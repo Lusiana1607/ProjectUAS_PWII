@@ -6,7 +6,9 @@
 
 <div class="max-w-7xl mx-auto">
 
-    <div class="mb-8">
+    <div class="flex justify-between items-end mb-8">
+
+    <div>
         <h1 class="text-3xl font-bold text-gray-800">
             Reservasi Masuk
         </h1>
@@ -15,6 +17,41 @@
             Daftar reservasi yang masuk ke tempat Anda.
         </p>
     </div>
+
+    <form method="GET" action="{{ route('owner.bookings.index') }}">
+
+        <select
+            name="status"
+            onchange="this.form.submit()"
+            class="border rounded-lg px-4 py-2">
+
+            <option value="">Semua Status</option>
+
+            <option value="pending"
+                {{ request('status') == 'pending' ? 'selected' : '' }}>
+                Pending
+            </option>
+
+            <option value="approved"
+                {{ request('status') == 'approved' ? 'selected' : '' }}>
+                Disetujui
+            </option>
+
+            <option value="rejected"
+                {{ request('status') == 'rejected' ? 'selected' : '' }}>
+                Ditolak
+            </option>
+
+            <option value="completed"
+                {{ request('status') == 'completed' ? 'selected' : '' }}>
+                Selesai
+            </option>
+
+        </select>
+
+    </form>
+
+</div>
 
     @if($bookings->count() > 0)
 
