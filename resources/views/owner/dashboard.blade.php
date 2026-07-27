@@ -52,12 +52,10 @@
         Menu Owner
     </h2>
 
-    <button
-        class="bg-green-600 hover:bg-green-700 text-white px-5 py-3 rounded-lg">
-
-        + Tambah Tempat
-
-    </button>
+    <<a href="{{ route('owner.places.create') }}"
+   class="inline-block bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-3 rounded-lg transition">
+    Tambah Tempat
+</a>
 
 </div>
 
