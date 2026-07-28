@@ -14,6 +14,18 @@ class OwnerDashboardController extends Controller
 {
     $owner = Auth::user();
 
+    $hour = now()->format('H');
+
+if ($hour < 12) {
+    $greeting = 'Selamat Pagi';
+} elseif ($hour < 15) {
+    $greeting = 'Selamat Siang';
+} elseif ($hour < 18) {
+    $greeting = 'Selamat Sore';
+} else {
+    $greeting = 'Selamat Malam';
+}
+
     $totalPlaces = $owner->places()->count();
 
     $totalServices = Service::whereHas('place', function ($query) use ($owner) {
@@ -36,13 +48,29 @@ class OwnerDashboardController extends Controller
         $query->where('user_id', $owner->id);
     })->where('status', 'completed')->count();
 
+    $recentBookings = Booking::whereHas('place', function ($query) use ($owner) {
+    $query->where('user_id', $owner->id);
+})
+->with(['user', 'place'])
+->latest()
+->take(5)
+->get();
+
+    $chartData = [
+    $pendingBookings,
+    $approvedBookings,
+    $completedBookings,
+];
+
     return view('owner.dashboard', compact(
-        'totalPlaces',
-        'totalServices',
-        'totalBookings',
-        'pendingBookings',
-        'approvedBookings',
-        'completedBookings'
-    ));
+    'greeting',
+    'totalPlaces',
+    'totalServices',
+    'totalBookings',
+    'pendingBookings',
+    'approvedBookings',
+    'completedBookings',
+    'recentBookings'
+));
 }
 }
