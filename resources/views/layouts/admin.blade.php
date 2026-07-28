@@ -1,139 +1,107 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <title>@yield('title') | ReservHub Admin</title>
+    <title>@yield('title', 'Admin Panel') - ReservHub</title>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="min-h-screen bg-gradient-to-br from-gray-50 via-emerald-50 to-white">
+<body class="min-h-screen bg-gradient-to-br from-green-50 via-white to-green-50">
 
-    <header class="bg-emerald-600 shadow-lg">
+    <!-- header -->
+    <header class="bg-white/80 backdrop-blur-md border-b border-green-100 shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+            <div>
+                <h1 class="text-xl font-extrabold text-green-700 tracking-tight">ReservHub</h1>
+                <p class="text-xs text-gray-500">Admin Panel</p>
+            </div>
 
-    <div class="max-w-7xl mx-auto flex items-center justify-between px-6 py-5">
-
-        <div>
-
-            <h1 class="text-3xl font-bold text-white">
-                ReservHub
-            </h1>
-
-            <p class="text-emerald-100 text-sm mt-1">
-                Owner Panel
-            </p>
-
+            <div class="text-right">
+                <p class="text-sm font-semibold text-gray-800">{{ auth()->user()->name }}</p>
+                <p class="text-xs text-gray-500">Administrator</p>
+            </div>
         </div>
+    </header>
 
-        <div class="text-right">
+    <div class="max-w-7xl mx-auto px-6 py-8 flex flex-col md:flex-row gap-6">
 
-            <p class="text-white font-semibold">
-                {{ auth()->user()->name }}
-            </p>
+        <!-- sidebar -->
+        <aside class="w-full md:w-72 shrink-0">
+            <div class="bg-white/70 backdrop-blur-md rounded-3xl shadow-md border border-white/60 p-6">
 
-            <p class="text-emerald-100 text-sm">
-                Owner
-            </p>
+                <!-- profil -->
+                <div class="flex flex-col items-center text-center mb-6">
+                    <div class="w-16 h-16 rounded-full bg-green-600 text-white flex items-center justify-center text-2xl font-bold shadow">
+                        {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
+                    </div>
+                    <p class="mt-3 font-semibold text-gray-800">{{ auth()->user()->name }}</p>
+                    <p class="text-xs text-gray-500">Administrator</p>
+                </div>
 
-        </div>
+                <!-- menu -->
+                <nav class="flex flex-col gap-1">
+                    <a href="{{ route('admin.dashboard') }}"
+                        class="flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition
+                        {{ request()->routeIs('admin.dashboard') ? 'bg-green-600 text-white shadow' : 'text-gray-700 hover:bg-green-50' }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l9-9 9 9M4 10v10a1 1 0 001 1h4v-6h6v6h4a1 1 0 001-1V10" />
+                        </svg>
+                        Dashboard
+                    </a>
 
-    </div>
+                    <a href="{{ route('admin.categories.index') }}"
+                        class="flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition
+                        {{ request()->routeIs('admin.categories.*') ? 'bg-green-600 text-white shadow' : 'text-gray-700 hover:bg-green-50' }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h7" />
+                        </svg>
+                        Kelola Kategori
+                    </a>
 
-</header>
+                    <a href="{{ route('users.index') }}"
+                        class="flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition
+                        {{ request()->routeIs('users.*') ? 'bg-green-600 text-white shadow' : 'text-gray-700 hover:bg-green-50' }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87m6-5.13a4 4 0 10-4-4 4 4 0 004 4z" />
+                        </svg>
+                        Kelola User
+                    </a>
 
-    <div class="max-w-7xl mx-auto flex gap-6 py-8 px-6">
+                    <a href="{{ route('admin.owner-requests.index') }}"
+                        class="flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition
+                        {{ request()->routeIs('admin.owner-requests.*') ? 'bg-green-600 text-white shadow' : 'text-gray-700 hover:bg-green-50' }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        Pengajuan Owner
+                    </a>
 
-    <aside class="w-64 bg-white/80 backdrop-blur-xl rounded-3xl shadow-xl p-6 h-fit sticky top-6 border border-white">
+                    <hr class="my-3 border-green-100">
 
-    <div class="text-center border-b pb-5 mb-5">
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit"
+                            class="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium text-gray-700 hover:bg-green-50 transition">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                            </svg>
+                            Logout
+                        </button>
+                    </form>
+                </nav>
 
-        <div class="w-20 h-20 mx-auto rounded-full bg-gradient-to-br from-emerald-500 to-green-600 flex items-center justify-center text-white text-3xl shadow-lg">
+            </div>
+        </aside>
 
-    {{ strtoupper(substr(auth()->user()->name,0,1)) }}
-
-</div>
-
-        <h2 class="mt-4 font-bold text-lg text-gray-800">
-            {{ auth()->user()->name }}
-        </h2>
-
-        <p class="text-sm text-gray-500">
-            Owner ReservHub
-        </p>
-
-    </div>
-
-    <h3 class="text-xs uppercase tracking-widest text-gray-400 mb-3">
-        Menu Navigasi
-    </h3>
-
-        <nav class="space-y-2">
-
-           <a href="{{ route('owner.dashboard') }}"
-   class="block px-4 py-3 rounded-xl transition
-   {{ request()->routeIs('owner.dashboard')
-        ? 'bg-emerald-600 text-white shadow'
-        : 'hover:bg-emerald-100 hover:text-emerald-700 text-gray-700' }}">
-                🏠 Dashboard
-            </a>
-
-           <a href="{{ route('owner.places.index') }}"
-   class="block px-4 py-3 rounded-xl transition
-   {{ request()->routeIs('owner.places.*')
-        ? 'bg-emerald-600 text-white shadow'
-        : 'hover:bg-emerald-100 hover:text-emerald-700 text-gray-700' }}">
-                📍 Tempat Saya
-            </a>
-
-            <a href="{{ route('owner.services.index') }}"
-   class="block px-4 py-3 rounded-xl transition
-   {{ request()->routeIs('owner.services.*')
-        ? 'bg-emerald-600 text-white shadow'
-        : 'hover:bg-emerald-100 hover:text-emerald-700 text-gray-700' }}">
-                🛠 Layanan
-            </a>
-
-           <a href="{{ route('owner.bookings.index') }}"
-   class="block px-4 py-3 rounded-xl transition
-   {{ request()->routeIs('owner.bookings.*')
-        ? 'bg-emerald-600 text-white shadow'
-        : 'hover:bg-emerald-100 hover:text-emerald-700 text-gray-700' }}">
-                📅 Reservasi
-            </a>
-
-        </nav>
-
-        <form action="{{ route('logout') }}" method="POST" class="pt-4 border-t mt-4">
-
-    @csrf
-
-    <button
-        type="submit"
-        class="w-full bg-red-50 hover:bg-red-100 text-red-600 rounded-xl px-4 py-3 font-medium transition">
-
-        🚪 Logout
-
-    </button>
-
-</form>
-
-    </aside>
-
-    
-
-    <section class="flex-1">
-
-    <div class="bg-white/60 backdrop-blur-md rounded-3xl p-8 shadow-sm border border-white">
-
-        @yield('content')
+        <!-- content -->
+        <main class="flex-1">
+            <div class="bg-white rounded-3xl shadow-md p-6 min-h-[70vh]">
+                @yield('content')
+            </div>
+        </main>
 
     </div>
-
-</section>
-
-</div>
 
 </body>
 </html>
