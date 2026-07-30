@@ -4,14 +4,17 @@
 
 @section('content')
 
+{{-- Judul Halaman --}}
 <h1 class="text-3xl font-bold mb-6">
     Pengajuan Owner
 </h1>
 
+{{-- Tabel Pengajuan Owner --}}
 <div class="bg-white shadow rounded-lg p-6">
 
     <table class="w-full border-collapse">
 
+        {{-- Header Tabel --}}
         <thead>
 
             <tr class="border-b">
@@ -25,6 +28,7 @@
 
         </thead>
 
+        {{-- Isi Tabel --}}
         <tbody>
 
             @forelse($ownerRequests as $request)
@@ -52,15 +56,20 @@
                     </td>
 
                     <td>
-                        <a href="{{ route('admin.owner-requests.show', $request) }}" class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-2 rounded-lg text-sm">
+
+                        {{-- Tombol Detail --}}
+                        <a href="{{ route('admin.owner-requests.show', $request) }}"
+                           class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-2 rounded-lg text-sm">
                             Detail
                         </a>
+
                     </td>
 
                 </tr>
 
             @empty
 
+                {{-- Data Kosong --}}
                 <tr>
 
                     <td colspan="6" class="text-center py-5">

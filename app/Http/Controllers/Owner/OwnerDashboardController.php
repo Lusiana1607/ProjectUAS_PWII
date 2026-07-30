@@ -70,7 +70,8 @@ if ($hour < 12) {
     'pendingBookings',
     'approvedBookings',
     'completedBookings',
-    'recentBookings'
+    'recentBookings',
+    'chartData'
 ));
 }
 }

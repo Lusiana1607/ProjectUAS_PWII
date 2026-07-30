@@ -4,15 +4,18 @@
 
 @section('content')
 
+{{-- Judul Halaman --}}
 <h1 class="text-3xl font-bold mb-6">
     Edit Kategori
 </h1>
 
+{{-- Form Edit Kategori --}}
 <form action="{{ route('admin.categories.update', $category->id) }}" method="POST">
 
     @csrf
     @method('PUT')
 
+    {{-- Input Nama Kategori --}}
     <div class="mb-4">
 
         <label class="block font-semibold mb-2">
@@ -28,6 +31,7 @@
 
     </div>
 
+    {{-- Tombol Update --}}
     <button
         type="submit"
         class="bg-yellow-500 text-white px-5 py-2 rounded hover:bg-yellow-600">

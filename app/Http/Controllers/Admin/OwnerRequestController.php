@@ -8,6 +8,7 @@ use App\Models\OwnerRequest;
 
 class OwnerRequestController extends Controller
 {
+    // Menampilkan seluruh pengajuan owner
     public function index()
     {
         $ownerRequests = OwnerRequest::latest()->get();
@@ -15,35 +16,37 @@ class OwnerRequestController extends Controller
         return view('admin.owner_requests.index', compact('ownerRequests'));
     }
 
+    // Menampilkan detail pengajuan owner
     public function show(OwnerRequest $ownerRequest)
-{
-    return view('admin.owner_requests.show', compact('ownerRequest'));
-}
+    {
+        return view('admin.owner_requests.show', compact('ownerRequest'));
+    }
 
-public function approve(OwnerRequest $ownerRequest)
-{
-    $ownerRequest->update([
-        'status' => 'approved',
-    ]);
+    // Menyetujui pengajuan owner
+    public function approve(OwnerRequest $ownerRequest)
+    {
+        $ownerRequest->update([
+            'status' => 'approved',
+        ]);
 
-    $ownerRequest->user->update([
-    'role_id' => 2,
-]);
+        $ownerRequest->user->update([
+            'role_id' => 2,
+        ]);
 
-    return redirect()
-        ->route('admin.owner-requests.show', $ownerRequest)
-        ->with('success', 'Pengajuan owner berhasil disetujui.');
-}
+        return redirect()
+            ->route('admin.owner-requests.show', $ownerRequest)
+            ->with('success', 'Pengajuan owner berhasil disetujui.');
+    }
 
-public function reject(OwnerRequest $ownerRequest)
-{
-    $ownerRequest->update([
-        'status' => 'rejected',
-    ]);
+    // Menolak pengajuan owner
+    public function reject(OwnerRequest $ownerRequest)
+    {
+        $ownerRequest->update([
+            'status' => 'rejected',
+        ]);
 
-    return redirect()
-        ->route('admin.owner-requests.show', $ownerRequest)
-        ->with('success', 'Pengajuan owner berhasil ditolak.');
-}
-
+        return redirect()
+            ->route('admin.owner-requests.show', $ownerRequest)
+            ->with('success', 'Pengajuan owner berhasil ditolak.');
+    }
 }

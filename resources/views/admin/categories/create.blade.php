@@ -4,14 +4,17 @@
 
 @section('content')
 
+{{-- Judul Halaman --}}
 <h1 class="text-3xl font-bold mb-6">
     Tambah Kategori
 </h1>
 
+{{-- Form Tambah Kategori --}}
 <form action="{{ route('admin.categories.store') }}" method="POST">
 
     @csrf
 
+    {{-- Input Nama Kategori --}}
     <div class="mb-4">
         <label class="block font-semibold mb-2">
             Nama Kategori
@@ -25,6 +28,7 @@
         >
     </div>
 
+    {{-- Tombol Simpan --}}
     <button
         type="submit"
         class="bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700">

@@ -68,7 +68,7 @@
 
                         @if($notifCount > 0)
                             @foreach($notifBookings as $notif)
-                                <a href="{{ route('customer.explore.show', $notif->place_id) }}" class="block px-4 py-3 hover:bg-gray-50 text-sm text-gray-700 transition duration-150 ease-in-out border-b border-gray-50 last:border-none">
+                                <a href="{{ route('customer.show', $notif->place_id) }}" class="block px-4 py-3 hover:bg-gray-50 text-sm text-gray-700 transition duration-150 ease-in-out border-b border-gray-50 last:border-none">
                                     🎉 <span class="font-semibold">Booking Berhasil!</span> Kunjunganmu telah dikonfirmasi selesai oleh Admin. Yuk, isi rating & ulasan tempat sekarang!
                                 </a>
                             @endforeach

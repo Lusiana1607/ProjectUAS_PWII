@@ -4,14 +4,17 @@
 
 @section('content')
 
+{{-- Judul Halaman --}}
 <h1 class="text-3xl font-bold mb-6">
     Kelola User
 </h1>
 
+{{-- Tabel Kelola User --}}
 <div class="bg-white shadow rounded-lg p-6">
 
     <table class="w-full border-collapse">
 
+        {{-- Header Tabel --}}
         <thead>
 
             <tr class="border-b">
@@ -26,6 +29,7 @@
 
         </thead>
 
+        {{-- Isi Tabel --}}
         <tbody>
 
             @forelse($users as $user)
@@ -44,6 +48,7 @@
                         {{ $user->email }}
                     </td>
 
+                    {{-- Status User --}}
                     <td>
                         @if($user->is_active)
                         <span class="text-green-600 font-semibold">
@@ -56,24 +61,36 @@
                         @endif
                     </td>
 
+                    {{-- Tombol Aksi --}}
                     <td>
                         <form action="{{ route('admin.users.toggle-status', $user) }}" method="POST">
-                        @csrf
-                        @method('PATCH')
 
-                        @if($user->is_active)
-                        <button
-                            type="submit"
-                            class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded">
-                            Nonaktifkan
-                        </button>
-                        @else
-                        <button
-                            type="submit"
-                            class="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded">
-                            Aktifkan
-                        </button>
-                        @endif
+                            @csrf
+                            @method('PATCH')
+
+                            @if($user->is_active)
+
+                            {{-- Tombol Nonaktifkan --}}
+                            <button
+                                type="submit"
+                                class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded">
+
+                                Nonaktifkan
+
+                            </button>
+
+                            @else
+
+                            {{-- Tombol Aktifkan --}}
+                            <button
+                                type="submit"
+                                class="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded">
+
+                                Aktifkan
+
+                            </button>
+
+                            @endif
 
                         </form>
                     </td>
@@ -82,6 +99,7 @@
 
             @empty
 
+                {{-- Data Kosong --}}
                 <tr>
 
                     <td colspan="6" class="text-center py-5">
