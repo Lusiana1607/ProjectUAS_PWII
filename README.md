@@ -255,13 +255,13 @@ Lusiana16
 
 ## 8. Dashboard Customer
 
-![Customer](public/images/dokumentasi/customer-home.png)
+![Customer](public/images/dokumentasi/customer-dashboard.png)
 
 ---
 
 ## 9. User Flow Customer
 
-![User Flow Customer](public/images/dokumentasi/customer-dashboard.png)
+![User Flow Customer](public/images/dokumentasi/userflow3.png)
 
 ---
 
